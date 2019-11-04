@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
@@ -10,9 +11,9 @@ class ApiController extends AbstractController
     /**
      * @Route("/feed", name="feeder")
      */
-    public function feed(\Symfony\Component\HttpFoundation\Request $request, \App\Service\Feeder $feeder): \Symfony\Component\HttpFoundation\Response
+    public function feed(\Symfony\Component\HttpFoundation\Request $request): \Symfony\Component\HttpFoundation\Response
 	{
-		$raw = $feeder::get();
+		$raw = \App\Service\Feeder::get();
         return $this->json(['xml' => $raw, 'frequency' => $this->getFrequency($raw)]);
     }
 
@@ -22,7 +23,7 @@ class ApiController extends AbstractController
 			"you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my",
 			"one", "all", "would", "there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which", "go", "me"]);
 
-		$crawler = new \Symfony\Component\DomCrawler\Crawler($text);
+		$crawler = new Crawler($text);
 		$crawler = $crawler->filter('title, summary');
 
 		$frequency = [];
