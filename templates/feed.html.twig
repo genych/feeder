@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    Frequency:
+
+    <ul>
+        {% for word, count in frequency %}
+            <li>{{ word }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    Feed:
+
+    {% for item in feed %}
+        {% for name, text in item %}
+            {{ name }}: {{ text }}
+            <hr>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

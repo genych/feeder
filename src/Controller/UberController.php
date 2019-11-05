@@ -34,16 +34,7 @@ class UberController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('main.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->main($authenticationUtils);
     }
 
     /**
@@ -93,8 +84,7 @@ class UberController extends AbstractController
     public function feed(): \Symfony\Component\HttpFoundation\Response
 	{
 		$raw = \App\Service\Feeder::get();
-        return $this->json($this->getFrequency($raw));
-//        return $this->json(['xml' => $raw, 'frequency' => $this->getFrequency($raw)]);
+        return $this->render('feed.html.twig', ['frequency' => $this->getFrequency($raw), 'feed' => $this->getFeed($raw)]);
     }
 
     private function getFrequency(string $text): array {
@@ -130,5 +120,11 @@ class UberController extends AbstractController
 		$frequency = array_slice($frequency, 0, 20);
 
 		return $frequency;
+	}
+
+    private function getFeed(string $text): array {
+		$crawler = new Crawler($text);
+		$crawler = $crawler->filter('title, summary');
+        return $crawler->each(function (Crawler $node) {return [$node->nodeName() => strip_tags($node->text())];});
 	}
 }
