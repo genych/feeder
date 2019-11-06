@@ -88,7 +88,6 @@ class UberController extends AbstractController
     }
 
     private function getFrequency(string $text): array {
-		// TODO: static?
 		$ignored = array_flip(["the", "be", "to", "of", "and", "a", "in", "that", "have", "I", "it", "for", "not", "on", "with", "he", "as",
 			"you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my",
 			"one", "all", "would", "there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which", "go", "me"]);
@@ -117,7 +116,7 @@ class UberController extends AbstractController
 		}
 
 		arsort($frequency, SORT_NUMERIC);
-		$frequency = array_slice($frequency, 0, 20);
+		$frequency = array_slice($frequency, 0, 10);
 
 		return $frequency;
 	}

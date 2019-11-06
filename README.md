@@ -1,9 +1,11 @@
 # feeder
 
 what?
+
 crude feed reader with auth
 
 why?
+
 for science!
 
 how?
@@ -12,6 +14,5 @@ how?
 * cd
 * composer install
 * make tea. sorry, it's huge
-* bin/console doctrine:migrations:migrate
 * php -S 0.0.0.0:8080 -t public/
 * http://localhost:8080

@@ -5,6 +5,7 @@
 /.env.*.local
 /public/bundles/
 /var/
+!/var/db.sqlite
 /vendor/
 ###< symfony/framework-bundle ###
 
