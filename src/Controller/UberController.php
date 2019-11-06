@@ -14,6 +14,8 @@ use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+
+// TODO: add another route for email check. take from post, ask repository, return json
 class UberController extends AbstractController
 {
     /**
